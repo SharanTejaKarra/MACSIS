@@ -7,46 +7,48 @@ A multi-agent system built on LangGraph that routes customer support queries thr
 The system uses a fan-out/fan-in graph where an orchestrator classifies the query, dispatches specialist agents in parallel, synthesizes their findings, and decides whether to escalate or respond directly.
 
 ```
-                    ┌─────────────────────┐
-                    │   START             │
-                    └──────────┬──────────┘
-                               │
-                    ┌──────────▼──────────┐
-                    │ orchestrator_analyze │
-                    │ (classify + plan)   │
-                    └──────────┬──────────┘
-                               │
-              ┌────────────────┼────────────────┐
-              │                │                │
-    ┌─────────▼──────┐ ┌──────▼───────┐ ┌──────▼────────┐
-    │ account_agent  │ │ feature_agent│ │ contract_agent│
-    │ (profile/plan) │ │ (docs/limits)│ │ (SLA/terms)   │
-    └─────────┬──────┘ └──────┬───────┘ └──────┬────────┘
-              │                │                │
-              └────────────────┼────────────────┘
-                               │
-                  ┌────────────▼────────────┐
-                  │ orchestrator_synthesize │
-                  │ (merge + conflict check)│
-                  └────────────┬────────────┘
-                               │
-                  ┌────────────┴────────────┐
-                  │                         │
-       ┌──────────▼──────────┐    ┌─────────▼─────────┐
-       │  escalation_agent   │    │                   │
-       │  (severity + route) │    │                   │
-       └──────────┬──────────┘    │                   │
-                  │               │                   │
-                  └───────┬───────┘                   │
-                          │                           │
-               ┌──────────▼──────────┐                │
-               │ orchestrator_respond │◄───────────────┘
-               │ (final answer)      │
-               └──────────┬──────────┘
+                     ┌───────────┐
+                     │   START   │
+                     └─────┬─────┘
+                           │
+                ┌──────────▼──────────┐
+                │ orchestrator_analyze │
+                │  (classify + plan)  │
+                └──────────┬──────────┘
+                           │
+           ┌───────────────┼───────────────┐
+           │               │               │
+  ┌────────▼────────┐ ┌───▼──────────┐ ┌──▼───────────┐
+  │  account_agent  │ │ feature_agent│ │contract_agent│
+  │ (profile/plan)  │ │ (docs/limits)│ │ (SLA/terms)  │
+  └────────┬────────┘ └───┬──────────┘ └──┬───────────┘
+           │               │               │
+           └───────────────┼───────────────┘
+                           │
+              ┌────────────▼────────────┐
+              │ orchestrator_synthesize │
+              │ (merge + conflict check)│
+              └────────────┬────────────┘
+                           │
+                needs escalation?
+                    /          \
+                  yes           no
+                  /               \
+    ┌────────────▼───────────┐     │
+    │    escalation_agent    │     │
+    │  (severity + route)    │     │
+    └────────────┬───────────┘     │
+                 │                 │
+                 └────────┬────────┘
                           │
-                    ┌─────▼─────┐
-                    │    END    │
-                    └───────────┘
+              ┌───────────▼───────────┐
+              │  orchestrator_respond  │
+              │    (final answer)      │
+              └───────────┬───────────┘
+                          │
+                     ┌────▼────┐
+                     │   END   │
+                     └─────────┘
 ```
 
 The orchestrator decides which agents to invoke based on query classification. Not every query needs all three specialists — a simple feature question might only trigger the feature agent, while an SLA complaint goes to the contract agent and account agent both.
@@ -70,12 +72,36 @@ The orchestrator decides which agents to invoke based on query classification. N
    pip install -r requirements.txt
    ```
 
-4. **Set up environment variables**
+4. **Configure your LLM provider**
+
+   The system supports both cloud (OpenAI) and local (Ollama) backends. Edit `config.yaml`:
+
+   **Option A — Local with Ollama (no API key needed):**
+   ```bash
+   brew install ollama
+   ollama serve                # start the server
+   ollama pull qwen3:8b        # download the model (~5GB)
+   ```
+   In `config.yaml`:
+   ```yaml
+   llm:
+     provider: "ollama"
+     model: "qwen3:8b"
+   ```
+
+   **Option B — OpenAI:**
    ```bash
    cp .env.example .env
-   # Edit .env and add your OpenAI API key
-   # Langfuse keys are optional — the system works without them
+   # Add your OPENAI_API_KEY to .env
    ```
+   In `config.yaml`:
+   ```yaml
+   llm:
+     provider: "openai"
+     model: "gpt-4o-mini"
+   ```
+
+   Langfuse keys are optional — the system works fine without them.
 
 5. **Run**
    ```bash
@@ -118,6 +144,7 @@ MACSIS/
 ├── .env.example
 │
 ├── agents/
+│   ├── llm_factory.py          # LLM provider switch (OpenAI / Ollama)
 │   ├── base_agent.py           # Base class with tool-calling loop
 │   ├── orchestrator.py         # Analyze, synthesize, and respond nodes
 │   ├── account_agent.py        # Customer profile and billing specialist
