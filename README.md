@@ -57,7 +57,7 @@ The orchestrator decides which agents to invoke based on query classification. N
 
 1. **Clone the repo**
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/SharanTejaKarra/MACSIS.git
    cd MACSIS
    ```
 
@@ -130,7 +130,7 @@ pytest tests/ -v
 # Just the tool tests
 pytest tests/test_tools.py -v
 
-# Include end-to-end tests (requires OPENAI_API_KEY)
+# End-to-end tests (need a running LLM — either Ollama or OpenAI key)
 OPENAI_API_KEY=sk-... pytest tests/ -v
 ```
 
@@ -220,17 +220,17 @@ MACSIS/
 Every node in the graph logs its token usage. After each run, you get a table like:
 
 ```
-+------------------------+-------+--------+-------+-------+
-| Agent                  | Input | Output | Total | Calls |
-+------------------------+-------+--------+-------+-------+
-| account_agent          |  1200 |    350 |  1550 |     2 |
-| feature_agent          |   900 |    280 |  1180 |     1 |
-| orchestrator_analyze   |   500 |    120 |   620 |     1 |
-| orchestrator_respond   |  1800 |    450 |  2250 |     1 |
-| orchestrator_synthesize|  1400 |    200 |  1600 |     1 |
-+------------------------+-------+--------+-------+-------+
-| TOTAL                  |  5800 |   1400 |  7200 |     6 |
-+------------------------+-------+--------+-------+-------+
++-------------------------+-------+--------+-------+-------+
+| Agent                   | Input | Output | Total | Calls |
++-------------------------+-------+--------+-------+-------+
+| account_agent           |  1200 |    350 |  1550 |     2 |
+| feature_agent           |   900 |    280 |  1180 |     1 |
+| orchestrator_analyze    |   500 |    120 |   620 |     1 |
+| orchestrator_respond    |  1800 |    450 |  2250 |     1 |
+| orchestrator_synthesize |  1400 |    200 |  1600 |     1 |
++-------------------------+-------+--------+-------+-------+
+| TOTAL                   |  5800 |   1400 |  7200 |     6 |
++-------------------------+-------+--------+-------+-------+
 ```
 
 Use `--all-scenarios` to get a full breakdown saved to `results/query_results.json`.
