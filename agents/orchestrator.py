@@ -41,7 +41,7 @@ Available agents:
 
 Output ONLY a valid JSON object — no markdown fences, no explanation:
 {
-    "query_classification": "<one of: basic_feature, plan_mismatch, contradiction, sla_violation, config_help>",
+    "query_classification": "<one of: basic_feature, plan_mismatch, contradiction, sla_violation, config_help, not_support>",
     "agents_needed": [
         {"agent_name": "<agent>", "reason": "why this agent is needed"}
     ]
@@ -52,7 +52,8 @@ Classification guide:
 - plan_mismatch: customer asks about something their plan may not cover — account_agent + feature_agent
 - contradiction: conflicting information between what the customer sees and what should be true — all three agents
 - sla_violation: anything about SLA, uptime guarantees, response times — contract_agent (+ account_agent if context helps)
-- config_help: setup or configuration question — account_agent + feature_agent"""
+- config_help: setup or configuration question — account_agent + feature_agent
+- not_support: the query is not a customer support question (spam, abuse, gibberish, off-topic). Set agents_needed to an empty list."""
 
 
 def orchestrator_analyze_node(state: GraphState) -> dict:
@@ -90,6 +91,20 @@ def orchestrator_analyze_node(state: GraphState) -> dict:
 
     classification = parsed.get("query_classification", "basic_feature")
     agents_needed = parsed.get("agents_needed", [])
+
+    # guardrail: reject non-support queries early
+    if classification == "not_support":
+        return {
+            "query_classification": "not_support",
+            "investigation_plan": [],
+            "current_phase": "responding",
+            "final_response": (
+                "I'm sorry, but I can only help with TechCorp product and account questions. "
+                "Could you please rephrase your question as a support request?"
+            ),
+            "token_usage_log": [token_usage],
+            "messages": [response],
+        }
 
     # convert to typed steps
     plan = []

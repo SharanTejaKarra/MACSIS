@@ -2,12 +2,34 @@
 Streamlit UI for MACSIS.
 Run with: streamlit run app.py
 """
+import re
 import time
 import streamlit as st
 import yaml
 from dotenv import load_dotenv
 
 from memory.state_schema import GraphState
+
+
+# -- input guardrails --
+
+BLOCKED_PATTERNS = re.compile(
+    r"\b(fuck|shit|bitch|asshole|dick|cunt|bastard|damn|stfu|wtf|"
+    r"kill\s+(your|my|him|her|them)self|"
+    r"hack|inject|drop\s+table|rm\s+-rf|<script)"
+    , re.IGNORECASE
+)
+
+MIN_QUERY_LENGTH = 5
+
+def validate_query(query: str) -> tuple[bool, str]:
+    """Quick check before we burn LLM tokens on garbage input."""
+    q = query.strip()
+    if len(q) < MIN_QUERY_LENGTH:
+        return False, "Query is too short. Please describe your support issue."
+    if BLOCKED_PATTERNS.search(q):
+        return False, "Your message contains inappropriate language. Please rephrase your support question."
+    return True, ""
 from monitoring.langfuse_config import init_langfuse
 from monitoring.token_tracker import TokenTracker
 from graph.builder import build_graph
@@ -133,6 +155,12 @@ with st.sidebar:
 
 # -- main area --
 if run and query.strip():
+    # guardrail check
+    is_valid, rejection_msg = validate_query(query)
+    if not is_valid:
+        st.error(rejection_msg)
+        st.stop()
+
     graph = get_graph()
     initial_state = build_initial_state(query, customer_id, f"scenario_{scenario_id}")
 
