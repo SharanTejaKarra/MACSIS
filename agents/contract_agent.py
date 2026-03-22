@@ -6,6 +6,7 @@ from __future__ import annotations
 from agents.base_agent import BaseAgent
 from agents.llm_factory import get_llm
 from memory.state_schema import GraphState
+from tools.contract_tools import contract_tools
 
 
 class ContractAgent(BaseAgent):
@@ -28,8 +29,6 @@ class ContractAgent(BaseAgent):
 
 
 def contract_agent_node(state: GraphState) -> dict:
-    from tools.contract_tools import contract_tools
-
     llm = get_llm()
     agent = ContractAgent(llm=llm, tools=contract_tools, agent_name="contract_agent")
     return agent.invoke(state)

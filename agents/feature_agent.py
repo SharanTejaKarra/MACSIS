@@ -6,6 +6,7 @@ from __future__ import annotations
 from agents.base_agent import BaseAgent
 from agents.llm_factory import get_llm
 from memory.state_schema import GraphState
+from tools.feature_tools import feature_tools
 
 
 class FeatureAgent(BaseAgent):
@@ -27,8 +28,6 @@ class FeatureAgent(BaseAgent):
 
 
 def feature_agent_node(state: GraphState) -> dict:
-    from tools.feature_tools import feature_tools
-
     llm = get_llm()
     agent = FeatureAgent(llm=llm, tools=feature_tools, agent_name="feature_agent")
     return agent.invoke(state)

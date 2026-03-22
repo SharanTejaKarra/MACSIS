@@ -6,6 +6,7 @@ from __future__ import annotations
 from agents.base_agent import BaseAgent
 from agents.llm_factory import get_llm
 from memory.state_schema import GraphState
+from tools.account_tools import account_tools
 
 
 class AccountAgent(BaseAgent):
@@ -24,8 +25,6 @@ class AccountAgent(BaseAgent):
 
 
 def account_agent_node(state: GraphState) -> dict:
-    from tools.account_tools import account_tools
-
     llm = get_llm()
     agent = AccountAgent(llm=llm, tools=account_tools, agent_name="account_agent")
     return agent.invoke(state)
