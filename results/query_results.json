@@ -1,0 +1,515 @@
+[
+  {
+    "scenario_id": "1",
+    "scenario_name": "Basic Feature Question",
+    "query": "How do I enable dark mode in my account?",
+    "customer_id": "CUST-002",
+    "query_classification": "basic_feature",
+    "final_response": "**Subject:** Dark Mode Enablement for Your Account  \n\nDear CUST-002,  \n\nThank you for reaching out! We\u2019d like to clarify that dark mode is already enabled by default for Pro plan users, as confirmed by our system. However, since you\u2019re seeking steps to activate it, we\u2019re escalating this to our engineering team to investigate potential misconfigurations or display issues.  \n\n**Here\u2019s what you can do now:**  \n1. Navigate to your **Account Settings**.  \n2. Look for the **\"Dark Mode\" toggle** (it may be labeled differently depending on your platform).  \n3. Switch it on or off as preferred.  \n\nIf you\u2019re still unable to locate the option or encounter issues, a specialist team is currently reviewing your account to resolve this discrepancy. We\u2019ll provide further updates shortly.  \n\nFor immediate assistance, feel free to reply with your preferred device (e.g., web, mobile app) or let us know if you\u2019d like to verify your plan details.  \n\nThank you for your patience!  \nTechCorp Support Team",
+    "internal_reasoning": "Contradictions: The feature_agent states dark mode is already enabled by default for the Pro plan, but the customer is asking how to enable it, implying it is not currently active.\nSynthesis: The customer appears to be on a Pro plan where dark mode is supposed to be enabled by default, but they are seeking instructions to activate it, suggesting either a misunderstanding, a plan change, or a system issue requiring clarification.\nEscalation: The customer's request conflicts with the agent's assertion that dark mode is already enabled, creating confusion about the account's current state.",
+    "escalation": {
+      "triggered": true,
+      "severity": "medium",
+      "ticket_id": "ESC-ACDB13",
+      "routed_to": "engineering",
+      "reason": "The customer is seeking instructions to enable dark mode despite the agent confirming it's already enabled by default for their Pro plan. This contradiction indicates a potential misconfiguration or misunderstanding that requires engineering investigation."
+    },
+    "agents_invoked": [
+      "feature_agent",
+      "escalation_agent"
+    ],
+    "token_usage": {
+      "total": {
+        "input_tokens": 3624,
+        "output_tokens": 2562,
+        "total_tokens": 6186,
+        "num_llm_calls": 5
+      },
+      "by_agent": {
+        "orchestrator_analyze": {
+          "input_tokens": 280,
+          "output_tokens": 566,
+          "calls": 1,
+          "total_tokens": 846
+        },
+        "feature_agent": {
+          "input_tokens": 2057,
+          "output_tokens": 735,
+          "calls": 1,
+          "total_tokens": 2792
+        },
+        "orchestrator_synthesize": {
+          "input_tokens": 279,
+          "output_tokens": 421,
+          "calls": 1,
+          "total_tokens": 700
+        },
+        "escalation_agent": {
+          "input_tokens": 515,
+          "output_tokens": 269,
+          "calls": 1,
+          "total_tokens": 784
+        },
+        "orchestrator_respond": {
+          "input_tokens": 493,
+          "output_tokens": 571,
+          "calls": 1,
+          "total_tokens": 1064
+        }
+      },
+      "raw_log": [
+        {
+          "agent_name": "orchestrator_analyze",
+          "input_tokens": 280,
+          "output_tokens": 566,
+          "model": "qwen3:8b",
+          "timestamp": 1774165065.700348
+        },
+        {
+          "agent_name": "feature_agent",
+          "input_tokens": 2057,
+          "output_tokens": 735,
+          "model": "qwen3:8b",
+          "timestamp": 1774165136.528085
+        },
+        {
+          "agent_name": "orchestrator_synthesize",
+          "input_tokens": 279,
+          "output_tokens": 421,
+          "model": "qwen3:8b",
+          "timestamp": 1774165176.6126342
+        },
+        {
+          "agent_name": "escalation_agent",
+          "input_tokens": 515,
+          "output_tokens": 269,
+          "model": "qwen3:8b",
+          "timestamp": 1774165205.601085
+        },
+        {
+          "agent_name": "orchestrator_respond",
+          "input_tokens": 493,
+          "output_tokens": 571,
+          "model": "qwen3:8b",
+          "timestamp": 1774165264.145378
+        }
+      ]
+    }
+  },
+  {
+    "scenario_id": "2",
+    "scenario_name": "Plan-to-Feature Mismatch",
+    "query": "I'm on the Starter plan, but I need to integrate with your API for my automation workflow. What are my options?",
+    "customer_id": "CUST-001",
+    "query_classification": "plan_mismatch",
+    "final_response": "Hi Alice,  \n\nThanks for reaching out! To integrate with our API for your automation workflow, you\u2019ll need to upgrade from the **Starter plan** to a tier that includes API access. Here\u2019s what you need to know:  \n\n### Current Plan Limitations  \n- The **Starter plan** does not include API integration.  \n- Your account currently has **2 seats available**, which could be utilized if you upgrade to a plan that supports more users.  \n\n### Upgrade Options  \nTo access API features, consider upgrading to the **Professional plan** (or higher, like Enterprise). These tiers include:  \n- Full API access for automation workflows  \n- Additional seats (confirm seat limits with your support team)  \n- Advanced features like custom integrations and SSO  \n\n### Next Steps  \n1. **Upgrade your plan** to Professional for API access.  \n2. Once upgraded, refer to our [API documentation](#) to set up your integration.  \n3. If you need further assistance with plan details or upgrades, our support team is happy to help!  \n\nLet me know if you\u2019d like guidance on selecting the right plan for your needs. \ud83d\ude0a  \n\nBest regards,  \nTechCorp Support Team",
+    "internal_reasoning": "Contradictions: \nSynthesis: Both agents confirm the Starter plan does not include API integration. The customer needs to upgrade to Professional (or higher) tier to access API features. No contradictions exist between findings, so no escalation required.\nEscalation: No conflicting information between agents; both confirm Starter plan lacks API access and require upgrade to Pro/Enterprise",
+    "escalation": {
+      "triggered": false,
+      "severity": null,
+      "ticket_id": null,
+      "routed_to": null,
+      "reason": null
+    },
+    "agents_invoked": [
+      "account_agent",
+      "feature_agent"
+    ],
+    "token_usage": {
+      "total": {
+        "input_tokens": 3998,
+        "output_tokens": 2198,
+        "total_tokens": 6196,
+        "num_llm_calls": 5
+      },
+      "by_agent": {
+        "orchestrator_analyze": {
+          "input_tokens": 295,
+          "output_tokens": 355,
+          "calls": 1,
+          "total_tokens": 650
+        },
+        "account_agent": {
+          "input_tokens": 1320,
+          "output_tokens": 646,
+          "calls": 1,
+          "total_tokens": 1966
+        },
+        "feature_agent": {
+          "input_tokens": 1236,
+          "output_tokens": 532,
+          "calls": 1,
+          "total_tokens": 1768
+        },
+        "orchestrator_synthesize": {
+          "input_tokens": 541,
+          "output_tokens": 245,
+          "calls": 1,
+          "total_tokens": 786
+        },
+        "orchestrator_respond": {
+          "input_tokens": 606,
+          "output_tokens": 420,
+          "calls": 1,
+          "total_tokens": 1026
+        }
+      },
+      "raw_log": [
+        {
+          "agent_name": "orchestrator_analyze",
+          "input_tokens": 295,
+          "output_tokens": 355,
+          "model": "qwen3:8b",
+          "timestamp": 1774165302.3498838
+        },
+        {
+          "agent_name": "account_agent",
+          "input_tokens": 1320,
+          "output_tokens": 646,
+          "model": "qwen3:8b",
+          "timestamp": 1774165447.767733
+        },
+        {
+          "agent_name": "feature_agent",
+          "input_tokens": 1236,
+          "output_tokens": 532,
+          "model": "qwen3:8b",
+          "timestamp": 1774165401.018878
+        },
+        {
+          "agent_name": "orchestrator_synthesize",
+          "input_tokens": 541,
+          "output_tokens": 245,
+          "model": "qwen3:8b",
+          "timestamp": 1774165478.810101
+        },
+        {
+          "agent_name": "orchestrator_respond",
+          "input_tokens": 606,
+          "output_tokens": 420,
+          "model": "qwen3:8b",
+          "timestamp": 1774165528.990604
+        }
+      ]
+    }
+  },
+  {
+    "scenario_id": "3",
+    "scenario_name": "Contradictory Information",
+    "query": "Your documentation says the Pro plan includes unlimited API calls, but I'm seeing rate limit errors after 1000 calls/month. I've checked my account and it shows Pro. Is this a bug, or am I misunderstanding something?",
+    "customer_id": "CUST-002",
+    "query_classification": "contradiction",
+    "final_response": "**Subject:** Clarification on Pro Plan API Call Limits  \n\nDear CUST-002,  \n\nThank you for reaching out. We\u2019re sorry for the confusion and appreciate your patience as we resolve this.  \n\n### **Understanding Your Issue**  \nYour account (CUST-002) is confirmed as active on the **Pro plan** with 25 seats, and billing records show three consecutive months of paid Pro invoices. However, you\u2019re encountering rate limit errors after 1000 API calls/month, which conflicts with the documentation stating \"unlimited API calls.\"  \n\n### **Key Findings**  \n1. **Plan Limit Clarification**:  \n   - The **Pro plan** actually has a **monthly rate limit of 50,000 API calls** (not unlimited), as confirmed by our internal review.  \n   - Your 1000-call threshold may reflect an older plan configuration, a miscommunication in documentation, or a per-seat limit (e.g., 1000 calls per seat for 20 active seats = 20,000 calls total).  \n\n2. **Documentation Discrepancy**:  \n   - There\u2019s a critical conflict between the Pro plan\u2019s documented \"unlimited API calls\" and the actual 50k call limit. This is being escalated to our product team to resolve the documentation error and clarify rate limit definitions.  \n\n3. **Possible Causes**:  \n   - You may be using multiple API keys (each tied to a seat), hitting individual per-seat limits.  \n   - The Pro plan\u2019s API limit might have been misconfigured or misunderstood.  \n\n### **Next Steps**  \n- A specialist team is actively investigating this issue (ticket: ESC-8FF677) to resolve the documentation discrepancy and ensure your plan aligns with your usage.  \n- To help resolve this faster, could you confirm:  \n  - How many API keys you\u2019re using?  \n  - Whether you\u2019ve recently upgraded or changed your plan configuration?  \n- If you\u2019d like, we can assist you in reviewing your current usage or upgrading to the Enterprise plan (which removes API call caps).  \n\n### **Apology & Support**  \nWe regret any inconvenience this may have caused. Our team is prioritizing this to ensure clarity and prevent future misunderstandings. Please feel free to reply with additional details or reach out to support@techcorp.com for further assistance.  \n\nThank you for your patience and understanding.  \n\nBest regards,  \nTechCorp Support Team",
+    "internal_reasoning": "Contradictions: The feature_agent states the Pro plan has a 50,000 call monthly limit (not unlimited), directly contradicting the documentation claim of 'unlimited API calls'. The account_agent suggests per-seat limits (1000 calls/seat) might apply, but this conflicts with the feature_agent's 50k figure. The contract_agent's inability to find a contract ID adds uncertainty about plan configuration.\nSynthesis: The customer's experience of 1000-call limits contradicts both the Pro plan's documented 'unlimited' feature and the feature_agent's 50k limit claim. The account_agent's per-seat limit explanation may partially align with the 1000 threshold but conflicts with the feature_agent's 50k figure. This inconsistency requires immediate clarification of the actual Pro plan's API limits, potential documentation errors, and verification of the customer's plan configuration.\nEscalation: Critical conflict exists between documented 'unlimited' API calls and both the feature_agent's 50k limit and the account_agent's per-seat limit interpretation. This requires resolving whether the documentation is outdated, the plan configuration is misaligned, or there's a misunderstanding of rate limit definitions.",
+    "escalation": {
+      "triggered": true,
+      "severity": "high",
+      "ticket_id": "ESC-8FF677",
+      "routed_to": "product_team",
+      "reason": "Critical conflict between documented 'unlimited' API calls and actual Pro plan limits (50k calls/month per feature_agent). Customer is blocked/losing money due to misaligned expectations. Requires resolving documentation error, plan configuration, or rate limit definition ambiguity."
+    },
+    "agents_invoked": [
+      "account_agent",
+      "contract_agent",
+      "feature_agent",
+      "escalation_agent"
+    ],
+    "token_usage": {
+      "total": {
+        "input_tokens": 8378,
+        "output_tokens": 7871,
+        "total_tokens": 16249,
+        "num_llm_calls": 7
+      },
+      "by_agent": {
+        "orchestrator_analyze": {
+          "input_tokens": 318,
+          "output_tokens": 853,
+          "calls": 1,
+          "total_tokens": 1171
+        },
+        "account_agent": {
+          "input_tokens": 1215,
+          "output_tokens": 1173,
+          "calls": 1,
+          "total_tokens": 2388
+        },
+        "contract_agent": {
+          "input_tokens": 1673,
+          "output_tokens": 1971,
+          "calls": 1,
+          "total_tokens": 3644
+        },
+        "feature_agent": {
+          "input_tokens": 2168,
+          "output_tokens": 862,
+          "calls": 1,
+          "total_tokens": 3030
+        },
+        "orchestrator_synthesize": {
+          "input_tokens": 754,
+          "output_tokens": 768,
+          "calls": 1,
+          "total_tokens": 1522
+        },
+        "escalation_agent": {
+          "input_tokens": 1125,
+          "output_tokens": 1372,
+          "calls": 1,
+          "total_tokens": 2497
+        },
+        "orchestrator_respond": {
+          "input_tokens": 1125,
+          "output_tokens": 872,
+          "calls": 1,
+          "total_tokens": 1997
+        }
+      },
+      "raw_log": [
+        {
+          "agent_name": "orchestrator_analyze",
+          "input_tokens": 318,
+          "output_tokens": 853,
+          "model": "qwen3:8b",
+          "timestamp": 1774165629.302458
+        },
+        {
+          "agent_name": "account_agent",
+          "input_tokens": 1215,
+          "output_tokens": 1173,
+          "model": "qwen3:8b",
+          "timestamp": 1774166026.1967869
+        },
+        {
+          "agent_name": "contract_agent",
+          "input_tokens": 1673,
+          "output_tokens": 1971,
+          "model": "qwen3:8b",
+          "timestamp": 1774166081.7605062
+        },
+        {
+          "agent_name": "feature_agent",
+          "input_tokens": 2168,
+          "output_tokens": 862,
+          "model": "qwen3:8b",
+          "timestamp": 1774166132.483265
+        },
+        {
+          "agent_name": "orchestrator_synthesize",
+          "input_tokens": 754,
+          "output_tokens": 768,
+          "model": "qwen3:8b",
+          "timestamp": 1774166239.151835
+        },
+        {
+          "agent_name": "escalation_agent",
+          "input_tokens": 1125,
+          "output_tokens": 1372,
+          "model": "qwen3:8b",
+          "timestamp": 1774166435.705802
+        },
+        {
+          "agent_name": "orchestrator_respond",
+          "input_tokens": 1125,
+          "output_tokens": 872,
+          "model": "qwen3:8b",
+          "timestamp": 1774166556.01318
+        }
+      ]
+    }
+  },
+  {
+    "scenario_id": "4",
+    "scenario_name": "SLA Violation",
+    "query": "I've been waiting for support response for 10 days on a critical production issue. My company has a contract with a 24-hour SLA guarantee. This is now costing us $500/day in lost revenue. I have my contract terms saved. Please verify if the SLA was violated and escalate this immediately.",
+    "customer_id": "CUST-003",
+    "query_classification": "sla_violation",
+    "final_response": "**Subject:** Urgent SLA Escalation and Next Steps  \n\nDear CUST-003,  \n\nWe sincerely apologize for the delay in addressing your critical production issue and for the inconvenience caused. Your concern about the SLA violation is being treated with the highest priority.  \n\n**Key Updates:**  \n1. **SLA Verification:** While we cannot confirm the SLA violation without the **contract ID**, your request has been escalated to the **Legal Compliance team** to address the potential breach and ensure your contractual obligations are upheld.  \n2. **Escalation Status:** A critical ticket (ESC-BA754E) has been opened and is being reviewed by legal compliance to assess the situation and determine next steps to resolve the issue and mitigate financial impact.  \n\n**Next Steps:**  \n- Please provide your **contract ID** at your earliest convenience. This will allow us to validate the SLA terms and expedite resolution.  \n- Our team will continue to monitor this case closely and keep you updated on progress.  \n\nWe understand the urgency of this matter and are committed to resolving it promptly. If you have any further questions or need additional support, please do not hesitate to reach out.  \n\nThank you for your patience and understanding.  \n\nBest regards,  \nTechCorp Support Team",
+    "internal_reasoning": "Contradictions: \nSynthesis: The agent's finding highlights a critical dependency on the contract ID to validate the SLA violation. While there are no contradictions in the findings, the lack of required information prevents immediate escalation. The customer's request necessitates urgent action, but the process is blocked until the contract ID is provided.\nEscalation: The customer is requesting SLA verification and escalation, but the contract_agent requires the contract ID to proceed. Without this information, the SLA violation cannot be confirmed or escalated, creating a bottleneck in resolving the customer's urgent request.",
+    "escalation": {
+      "triggered": true,
+      "severity": "critical",
+      "ticket_id": "ESC-BA754E",
+      "routed_to": "legal_compliance",
+      "reason": "The customer is experiencing a critical SLA breach with financial impact ($500/day loss) and contractual obligations at risk. While the contract ID is required for verification, the urgency of the SLA violation and potential legal exposure warrants immediate escalation to legal compliance."
+    },
+    "agents_invoked": [
+      "contract_agent",
+      "escalation_agent"
+    ],
+    "token_usage": {
+      "total": {
+        "input_tokens": 2266,
+        "output_tokens": 3458,
+        "total_tokens": 5724,
+        "num_llm_calls": 5
+      },
+      "by_agent": {
+        "orchestrator_analyze": {
+          "input_tokens": 337,
+          "output_tokens": 279,
+          "calls": 1,
+          "total_tokens": 616
+        },
+        "contract_agent": {
+          "input_tokens": 525,
+          "output_tokens": 645,
+          "calls": 1,
+          "total_tokens": 1170
+        },
+        "orchestrator_synthesize": {
+          "input_tokens": 313,
+          "output_tokens": 588,
+          "calls": 1,
+          "total_tokens": 901
+        },
+        "escalation_agent": {
+          "input_tokens": 550,
+          "output_tokens": 1223,
+          "calls": 1,
+          "total_tokens": 1773
+        },
+        "orchestrator_respond": {
+          "input_tokens": 541,
+          "output_tokens": 723,
+          "calls": 1,
+          "total_tokens": 1264
+        }
+      },
+      "raw_log": [
+        {
+          "agent_name": "orchestrator_analyze",
+          "input_tokens": 337,
+          "output_tokens": 279,
+          "model": "qwen3:8b",
+          "timestamp": 1774166596.712194
+        },
+        {
+          "agent_name": "contract_agent",
+          "input_tokens": 525,
+          "output_tokens": 645,
+          "model": "qwen3:8b",
+          "timestamp": 1774166683.947704
+        },
+        {
+          "agent_name": "orchestrator_synthesize",
+          "input_tokens": 313,
+          "output_tokens": 588,
+          "model": "qwen3:8b",
+          "timestamp": 1774166760.028181
+        },
+        {
+          "agent_name": "escalation_agent",
+          "input_tokens": 550,
+          "output_tokens": 1223,
+          "model": "qwen3:8b",
+          "timestamp": 1774166913.4025211
+        },
+        {
+          "agent_name": "orchestrator_respond",
+          "input_tokens": 541,
+          "output_tokens": 723,
+          "model": "qwen3:8b",
+          "timestamp": 1774167008.8018188
+        }
+      ]
+    }
+  },
+  {
+    "scenario_id": "5",
+    "scenario_name": "Account Configuration Help",
+    "query": "Our company just migrated from the competitor platform. We have 15 users, but the plan shows only 10 seats. Can you help me understand the licensing model and figure out how to set up all our users?",
+    "customer_id": "CUST-004",
+    "query_classification": "plan_mismatch",
+    "final_response": "**Subject:** Clarifying Your TechCorp Licensing and User Setup  \n\nHi David,  \n\nThank you for reaching out! Let me clarify your account details and help resolve the licensing discrepancy.  \n\n**Current Plan Overview:**  \nYour account is on the **Professional plan**, which includes **10 user licenses** (seats). The billing history confirms this plan was active in March 2026. At this time, all 10 seats are already in use.  \n\n**Why the Discrepancy?**  \nThe Professional plan\u2019s license limit is set at 10 seats. This means:  \n1. **You may need to upgrade** to a higher-tier plan (e.g., a 15-seat plan) to accommodate all 15 users.  \n2. **Not all users may have been added** to your account yet\u2014please verify if all 15 users are registered and assigned licenses.  \n\n**Next Steps:**  \n- **Upgrade Your Plan:** If you need additional seats, our sales team can help you explore options for a 15-seat plan or higher.  \n- **Check User Assignments:** Ensure all users are added to your account. You can review this in the **User Management section** of your dashboard.  \n- **Advanced Features:** Your Professional plan already includes priority support, API access, and advanced reporting\u2014great for seamless migration!  \n\nWould you like assistance contacting the sales team to upgrade your plan? Or would you prefer guidance on verifying user assignments?  \n\nLooking forward to helping you get fully set up!  \n\nBest regards,  \nTechCorp Support Team",
+    "internal_reasoning": "Contradictions: \nSynthesis: The customer's plan (Professional) is licensed for 10 seats, but they have 15 users. The account agent confirms this discrepancy and recommends upgrading the plan or verifying user additions. The feature agent's next steps align with this, as they will check plan details and licensing configuration. No contradictions exist between agents, so no escalation is needed at this stage.\nEscalation: The account agent has already provided clear plan details (Professional with 10 seats) and identified the seat discrepancy. No conflicting information exists between agents. The issue requires customer action to upgrade their plan or verify user additions, not escalation.",
+    "escalation": {
+      "triggered": false,
+      "severity": null,
+      "ticket_id": null,
+      "routed_to": null,
+      "reason": null
+    },
+    "agents_invoked": [
+      "account_agent",
+      "feature_agent"
+    ],
+    "token_usage": {
+      "total": {
+        "input_tokens": 4168,
+        "output_tokens": 4322,
+        "total_tokens": 8490,
+        "num_llm_calls": 5
+      },
+      "by_agent": {
+        "orchestrator_analyze": {
+          "input_tokens": 315,
+          "output_tokens": 313,
+          "calls": 1,
+          "total_tokens": 628
+        },
+        "account_agent": {
+          "input_tokens": 1264,
+          "output_tokens": 1316,
+          "calls": 1,
+          "total_tokens": 2580
+        },
+        "feature_agent": {
+          "input_tokens": 1276,
+          "output_tokens": 1442,
+          "calls": 1,
+          "total_tokens": 2718
+        },
+        "orchestrator_synthesize": {
+          "input_tokens": 594,
+          "output_tokens": 559,
+          "calls": 1,
+          "total_tokens": 1153
+        },
+        "orchestrator_respond": {
+          "input_tokens": 719,
+          "output_tokens": 692,
+          "calls": 1,
+          "total_tokens": 1411
+        }
+      },
+      "raw_log": [
+        {
+          "agent_name": "orchestrator_analyze",
+          "input_tokens": 315,
+          "output_tokens": 313,
+          "model": "qwen3:8b",
+          "timestamp": 1774167050.643848
+        },
+        {
+          "agent_name": "account_agent",
+          "input_tokens": 1264,
+          "output_tokens": 1316,
+          "model": "qwen3:8b",
+          "timestamp": 1774167424.738403
+        },
+        {
+          "agent_name": "feature_agent",
+          "input_tokens": 1276,
+          "output_tokens": 1442,
+          "model": "qwen3:8b",
+          "timestamp": 1774167325.363436
+        },
+        {
+          "agent_name": "orchestrator_synthesize",
+          "input_tokens": 594,
+          "output_tokens": 559,
+          "model": "qwen3:8b",
+          "timestamp": 1774167501.0144398
+        },
+        {
+          "agent_name": "orchestrator_respond",
+          "input_tokens": 719,
+          "output_tokens": 692,
+          "model": "qwen3:8b",
+          "timestamp": 1774167597.982701
+        }
+      ]
+    }
+  }
+]
